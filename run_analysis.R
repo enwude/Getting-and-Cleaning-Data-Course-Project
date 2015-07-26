@@ -1,3 +1,6 @@
+# Author: Ejike Nwude
+# Date: 7/26/2015
+
 #Load relevant libraries
 library(dplyr)
 library(data.table)
@@ -17,11 +20,17 @@ datasetPath <- "~/data/UCI HAR Dataset/"
 setwd(datasetPath)
 
 # Read test data
+# subjectTest: stores test data for subjects performing the various activities
+# xTest: stores data for test sets for the experiments
+# yTest: stores data for the test activities undertaken by each subject
 subjectTest <- tbl_df(read.table(file.path(datasetPath, "test", "subject_test.txt")))
 xTest <- tbl_df(read.table(file.path(datasetPath, "test", "X_test.txt")))
 yTest <- tbl_df(read.table(file.path(datasetPath, "test", "y_test.txt")))
 
 # Read train data
+# subjectTrain: stores train data for subjects performing the various activities
+# xTest: stores data for train sets for the experiments
+# yTest: stores data for the train activities undertaken by each subject
 subjectTrain <- tbl_df(read.table(file.path(datasetPath, "train", "subject_train.txt")))
 xTrain <- tbl_df(read.table(file.path(datasetPath, "train", "X_train.txt")))
 yTrain <- tbl_df(read.table(file.path(datasetPath, "train", "y_train.txt")))
@@ -30,7 +39,7 @@ yTrain <- tbl_df(read.table(file.path(datasetPath, "train", "y_train.txt")))
 featuresData <- tbl_df(read.table(file.path(datasetPath, "features.txt"), header = FALSE))
 activityLabel <- tbl_df(read.table(file.path(datasetPath, "activity_labels.txt")))
 
-# 
+# Combine test and train subjects, labels and sets
 xData <- bind_rows(xTrain, xTest)
 yData <- bind_rows(yTrain, yTest)
 subjectData <- bind_rows(subjectTrain, subjectTest)
